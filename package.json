@@ -1,0 +1,22 @@
+{
+  "name": "red-badger-test",
+  "version": "1.0.0",
+  "description": "Red Badger Developer Programming Problem",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc",
+    "start": "ts-node src/index.ts",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}
