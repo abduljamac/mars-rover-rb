@@ -4,3 +4,4 @@ export interface Coordinate {
 }
 
 export type Orientation = "N" | "E" | "S" | "W";
+export type Command = "L" | "R" | "F"
