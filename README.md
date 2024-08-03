@@ -1,5 +1,13 @@
 # Red Badger Developer Programming Problem
 
+## Project Structure
+
+- `src/`:
+  - `model/`: Contains the `MarsRover` class
+  - `types.ts`: Defines types and interfaces
+  - `helper.ts`: Contains functions for file input and out parsing
+  - `index.ts`: The main entry point for the code
+
 ## Quick Start
 
 1. Install Dependencies
@@ -8,7 +16,29 @@
  npm install
 ```
 
-2. To run the test run the command:
+2. Prepare an input file (e.g., `input.txt`) with the following format:
+
+- First line: Grid size
+- Second line: Rover initial position and orientation
+- Third line: movement instructions
+
+Example:
+
+```
+5 3
+1 1 E
+RFRFRFRF
+```
+
+3.  Run the program:
+
+```
+npm run start
+```
+
+4. Check the `output.txt` file for the results.
+
+5. To run the tests:
 
 ```
 npm run test
