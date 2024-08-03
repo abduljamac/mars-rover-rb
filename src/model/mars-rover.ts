@@ -1,5 +1,8 @@
 import { Command, Coordinate, Orientation } from "../types";
 
+const MAX_COORDINATE_VALUE = 50;
+const MAX_INSTRUCTION_LENGTH = 100;
+
 export class MarsRover {
   private grid: Coordinate;
   private location: Coordinate;
@@ -11,6 +14,8 @@ export class MarsRover {
     location: Coordinate,
     orientation: Orientation
   ) {
+    this.checkCoordinate(grid, "Grid");
+    this.checkCoordinate(location, "Initial location");
     this.grid = grid;
     this.location = location;
     this.orientation = orientation;
@@ -38,6 +43,11 @@ export class MarsRover {
   }
 
   move(commands: string): void {
+    if (commands.length > MAX_INSTRUCTION_LENGTH) {
+      throw new Error(
+        `Instruction string exceeds maximum length of ${MAX_INSTRUCTION_LENGTH}`
+      );
+    }
     const commandsArr = Array.from(commands.toUpperCase()) as Command[];
     for (const command of commandsArr) {
       if (this.lost) break;
@@ -124,5 +134,18 @@ export class MarsRover {
       roverLocation.y >= 0 &&
       roverLocation.y <= this.grid.y
     );
+  }
+
+  private checkCoordinate(coordinate: Coordinate, name: string): void {
+    if (
+      coordinate.x < 0 ||
+      coordinate.x > MAX_COORDINATE_VALUE ||
+      coordinate.y < 0 ||
+      coordinate.y > MAX_COORDINATE_VALUE
+    ) {
+      throw new Error(
+        `${name} exceeds maximum coordinate value of ${MAX_COORDINATE_VALUE}`
+      );
+    }
   }
 }
