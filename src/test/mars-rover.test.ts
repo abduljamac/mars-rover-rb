@@ -41,9 +41,7 @@ describe("MarsRover", () => {
   test("should become lost when moving off the grid when facing east", () => {
     rover.move("FFFFFF");
     expect(rover.isLost()).toBe(true);
-    expect(rover.speak()).toBe(
-      "X-Coordinates: 6, Y-Coordinates: 1, Direction: E LOST"
-    );
+    expect(rover.speak()).toBe("5 1 E LOST");
   });
 
   test("should throw error when grid exceeds maximum coordinate value", () => {

@@ -4,6 +4,7 @@ const MAX_COORDINATE_VALUE = 50;
 const MAX_INSTRUCTION_LENGTH = 100;
 
 export class MarsRover {
+  private static scent: Coordinate[] = [];
   private grid: Coordinate;
   private location: Coordinate;
   private orientation: Orientation;
@@ -38,7 +39,7 @@ export class MarsRover {
   }
 
   speak(): string {
-    const message = `X-Coordinates: ${this.location.x}, Y-Coordinates: ${this.location.y}, Direction: ${this.orientation}`;
+    const message = `${this.location.x} ${this.location.y} ${this.orientation}`;
     return this.lost ? `${message} LOST` : message;
   }
 
@@ -48,6 +49,7 @@ export class MarsRover {
         `Instruction string exceeds maximum length of ${MAX_INSTRUCTION_LENGTH}`
       );
     }
+
     const commandsArr = Array.from(commands.toUpperCase()) as Command[];
     for (const command of commandsArr) {
       if (this.lost) break;
@@ -103,7 +105,8 @@ export class MarsRover {
   }
 
   private moveForward(): void {
-    let expectedLocation = { x: this.location.x, y: this.location.y };
+    let expectedLocation = { ...this.location };
+
     switch (this.orientation) {
       case "N":
         expectedLocation.y++;
@@ -121,9 +124,10 @@ export class MarsRover {
 
     if (this.isRoverWithinBounds(expectedLocation)) {
       this.location = expectedLocation;
-    } else {
+    } else if (!this.hasScent(this.location)) {
       this.lost = true;
-      this.location = expectedLocation;
+      console.log("this.location", this.location);
+      MarsRover.scent.push({ ...this.location });
     }
   }
 
@@ -147,5 +151,11 @@ export class MarsRover {
         `${name} exceeds maximum coordinate value of ${MAX_COORDINATE_VALUE}`
       );
     }
+  }
+
+  private hasScent(location: Coordinate): boolean {
+    return MarsRover.scent.some(
+      (scent) => scent.x === location.x && scent.y === location.y
+    );
   }
 }
