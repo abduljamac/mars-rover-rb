@@ -33,12 +33,14 @@ export class MarsRover {
   }
 
   speak(): string {
-    return `X-Coordinates: ${this.location.x}, Y-Coordinates: ${this.location.y}, Direction: ${this.orientation}`;
+    const message = `X-Coordinates: ${this.location.x}, Y-Coordinates: ${this.location.y}, Direction: ${this.orientation}`;
+    return this.lost ? `${message} LOST` : message;
   }
 
   move(commands: string): void {
     const commandsArr = Array.from(commands.toUpperCase()) as Command[];
     for (const command of commandsArr) {
+      if (this.lost) break;
       switch (command) {
         case "R":
           this.rotateRight();
@@ -55,7 +57,6 @@ export class MarsRover {
     }
     this.speak();
   }
-
 
   private rotateRight(): void {
     switch (this.orientation) {
@@ -108,6 +109,20 @@ export class MarsRover {
         break;
     }
 
-    this.location = { x: expectedLocation.x, y: expectedLocation.y };
+    if (this.isRoverWithinBounds(expectedLocation)) {
+      this.location = expectedLocation;
+    } else {
+      this.lost = true;
+      this.location = expectedLocation;
+    }
+  }
+
+  private isRoverWithinBounds(roverLocation: Coordinate): boolean {
+    return (
+      roverLocation.x >= 0 &&
+      roverLocation.x <= this.grid.x &&
+      roverLocation.y >= 0 &&
+      roverLocation.y <= this.grid.y
+    );
   }
 }
