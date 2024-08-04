@@ -5,7 +5,7 @@
 - `src/`:
   - `model/`: Contains the `MarsRover` class
   - `types.ts`: Defines types and interfaces
-  - `helper.ts`: Contains functions for file input and out parsing
+  - `helper.ts`: Contains functions for file input and output parsing
   - `index.ts`: The main entry point for the code
 
 ## Quick Start
@@ -20,7 +20,7 @@
 
 - First line: Grid size
 - Second line: Rover initial position and orientation
-- Third line: movement instructions
+- Third line: Movement instructions
 
 Example:
 
@@ -43,3 +43,7 @@ npm run start
 ```
 npm run test
 ```
+
+## Explanation
+
+I approached the solution to the coding challenge this way because it provides a clear, maintainable, and extensible structure for solving the Mars Robot problem. Creating a MarsRover class allows for encapsulation of the rover's state (position, orientation) and behavior (movement, rotation) in a single class. In addition, it provided a nice solution to handling the scents problem. By making scents a static array, the information is shared across all instances of the class, allowing all rover instances to share information about previously lost rovers

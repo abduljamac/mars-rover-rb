@@ -63,4 +63,16 @@ describe("MarsRover", () => {
       "Instruction string exceeds maximum length of 100"
     );
   });
+
+  test("should not fall off at a location with robot scent", () => {
+    let rover1 = new MarsRover({ x: 5, y: 3 }, { x: 3, y: 2 }, "N");
+    rover1.move("FRRFLLFFRRFLL");
+    expect(rover1.isLost()).toBe(true);
+    expect(rover1.speak()).toEqual("3 3 N LOST");
+
+    let rover2 = new MarsRover({ x: 5, y: 3 }, { x: 0, y: 3 }, "W");
+    rover2.move("LLFFFLFLFL");
+    expect(rover2.isLost()).toBe(false);
+    expect(rover2.speak()).toEqual("2 3 S");
+  });
 });

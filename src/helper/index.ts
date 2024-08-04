@@ -6,6 +6,10 @@ export function parseInputFile(inputFile: string, outputFile: string) {
   const data = readFileSync(inputFile, "utf-8");
   const lines = data.trim().split("\n");
 
+  if (lines.length < 3) {
+    throw new Error("Invalid input format");
+  }
+
   const gridInput = lines[0].split(" ");
   const grid: Coordinate = {
     x: Number(gridInput[0]),
@@ -19,7 +23,7 @@ export function parseInputFile(inputFile: string, outputFile: string) {
     const location: Coordinate = { x: Number(x), y: Number(y) };
     const rover = new MarsRover(grid, location, orientation as Orientation);
 
-    const instructions = lines[i + 1];
+    const instructions: string = lines[i + 1];
     rover.move(instructions);
 
     results.push(rover.speak());

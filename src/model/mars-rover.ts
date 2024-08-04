@@ -43,7 +43,7 @@ export class MarsRover {
     return this.lost ? `${message} LOST` : message;
   }
 
-  move(commands: string): void {
+  move(commands: string): string {
     if (commands.length > MAX_INSTRUCTION_LENGTH) {
       throw new Error(
         `Instruction string exceeds maximum length of ${MAX_INSTRUCTION_LENGTH}`
@@ -67,7 +67,7 @@ export class MarsRover {
           throw new Error(`Invalid command: ${command}`);
       }
     }
-    this.speak();
+    return this.speak();
   }
 
   private rotateRight(): void {
@@ -126,7 +126,6 @@ export class MarsRover {
       this.location = expectedLocation;
     } else if (!this.hasScent(this.location)) {
       this.lost = true;
-      console.log("this.location", this.location);
       MarsRover.scent.push({ ...this.location });
     }
   }
