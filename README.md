@@ -4,8 +4,9 @@
 
 - `src/`:
   - `model/`: Contains the `MarsRover` class
-  - `types.ts`: Defines types and interfaces
-  - `helper.ts`: Contains functions for file input and output parsing
+  - `types/`: Defines types and interfaces
+  - `helper/`: Contains functions for file input and output parsing
+  - `tests/`: Jest unit tests for `MarsRover` requirements
   - `index.ts`: The main entry point for the code
 
 ## Quick Start
