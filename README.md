@@ -1,4 +1,4 @@
-# Red Badger Developer Programming Problem
+# RB Developer Programming Problem
 
 ## Project Structure
 
